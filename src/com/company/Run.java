@@ -12,5 +12,7 @@ public class Run {
         MainMenu.mainMenu();
 
         System.out.println("Test pull");
+
+        System.out.println("test pull number 2 ");
     }
 }
