@@ -8,7 +8,7 @@ public class MainMenu {
     public static void mainMenu() {
         System.out.println("Welcome to the Quiz game!");
         System.out.println("Type 1 - Start new game\n" +
-                "Type 2 - Get results by player name\n" +
+                "Type 2 - Results\n" +
                 "Type 3 - Exit the game\n");
 
         int choice = scanner.nextInt();
@@ -23,8 +23,7 @@ public class MainMenu {
                 //TODO new game start
                 break;
             case 2:
-                System.out.println("Enter the name of player to search the results : ");
-                //TODO search a player
+                //TODO show players results
                 break;
             case 3:
                 System.out.println("Quiting the game!");
