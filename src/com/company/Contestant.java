@@ -1,18 +1,25 @@
 package com.company;
 
-import com.company.menu.ContestantMenu;
-
 import java.util.HashMap;
-import java.util.Objects;
 
 public class Contestant {
-    private String name;
-    private boolean result;
+    private final String name;
+    private int result;
+    private int lifes;
 
-    public void contestantResult() {
-        HashMap<String, Boolean> nameResult = new HashMap<>();
-        nameResult.put(name, result);
+
+    public Contestant(String name, int result) {
+        this.name = name;
+        this.result = result;
+        lifes = 3;
     }
 
+    public void contestantResult() {
+//        HashMap<String, Integer> nameResult = new HashMap<>();
+//        nameResult.put(name, result);
+    }
 
+    public int getLifes() {
+        return lifes;
+    }
 }

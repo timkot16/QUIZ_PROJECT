@@ -20,7 +20,7 @@ public class MainMenu {
         switch (choice) {
             case 1:
                 System.out.println("Starting a new game");
-                //TODO new game start
+                ContestantMenu.contestantMenu();
                 break;
             case 2:
                 //TODO show players results
