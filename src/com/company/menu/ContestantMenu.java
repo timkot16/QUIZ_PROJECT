@@ -15,7 +15,7 @@ public class ContestantMenu {
     private static final Scanner scanner = new Scanner(System.in);
     private final static File answers = new File("answers.txt");
     private final static File question = new File("questions.txt");
-    private static final int questionsTotal = 2;
+    private static final int questionsTotal = 20;
 
     private static final List<Contestant> participants = new ArrayList<>();
 
