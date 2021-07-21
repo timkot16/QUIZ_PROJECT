@@ -51,7 +51,7 @@ public class ContestantMenu {
                     if(line.equalsIgnoreCase("question №" + currentQuestion)) {
                         questionText = fileSC.nextLine();
                     }
-                    if(line.contains("answers " + currentQuestion)){
+                    if(line.equalsIgnoreCase("answers " + currentQuestion)){
                         for (int i = 0; i < 4; i++) {
                             String alt = fileSC.nextLine();
                             if(alt.contains("True")) correctAnswer = i;
