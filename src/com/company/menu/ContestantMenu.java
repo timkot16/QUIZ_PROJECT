@@ -54,7 +54,10 @@ public class ContestantMenu {
                     if(line.equalsIgnoreCase("answers " + currentQuestion)){
                         for (int i = 0; i < 4; i++) {
                             String alt = fileSC.nextLine();
-                            if(alt.contains("True")) correctAnswer = i;
+                            if(alt.contains("True")) {
+                                correctAnswer = i;
+                                alt = alt.replaceFirst("- True", "");
+                            }
                             alternatives[i] = alt;
                         }
                     }
@@ -87,5 +90,9 @@ public class ContestantMenu {
         for (int i = 0; i < 4; i++) {
             System.out.println(answer.getText()[i]);
         }
+    }
+
+    public static void findCorrect(String line){
+
     }
 }
