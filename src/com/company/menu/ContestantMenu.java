@@ -75,6 +75,7 @@ public class ContestantMenu {
                 System.out.println("Enter the correct choice : ");
                 choice = scanner.nextInt();
             }
+
             System.out.println();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
