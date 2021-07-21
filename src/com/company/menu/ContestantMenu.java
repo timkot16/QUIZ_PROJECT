@@ -1,5 +1,6 @@
 package com.company.menu;
 
+import com.company.Answer;
 import com.company.Contestant;
 import com.company.Question;
 
@@ -13,9 +14,8 @@ import java.util.Scanner;
 public class ContestantMenu {
     private static final Scanner scanner = new Scanner(System.in);
     private final static File answers = new File("answers.txt");
-    private final static File question = new File("C:\\Users\\User\\IdeaProjects\\QUIZ_PROJECT\\src\\com\\company\\" +
-            "questions.txt");
-    private static final int questionsTotal = 2;
+    private final static File question = new File("questions.txt");
+    private static final int questionsTotal = 20;
 
     private static final List<Contestant> participants = new ArrayList<>();
 
@@ -40,32 +40,34 @@ public class ContestantMenu {
 
     public static boolean loadQuestion(int currentQuestion){
         try(Scanner fileSC = new Scanner(new FileReader(question))) {
-            StringBuilder questionFind = new StringBuilder();
-
             Question question = null;
-            StringBuilder text = new StringBuilder();
-            String answers = "";
-
+            Answer answer = null;
+            String questionText = "";
+            String[] alternatives = new String[4];
+            int correctAnswer = 0;
 
             do{
-
-                do{
                     String line = fileSC.nextLine();
-
-                }while();
-
+                    if(line.equalsIgnoreCase("question №" + currentQuestion)) {
+                        questionText = fileSC.nextLine();
+                    }
+                    if(line.contains("answers " + currentQuestion)){
+                        for (int i = 0; i < 4; i++) {
+                            String alt = fileSC.nextLine();
+                            if(alt.contains("True")) correctAnswer = i;
+                            alternatives[i] = alt;
+                        }
+                    }
             }while (fileSC.hasNext());
-//            while(fileSC.hasNextLine()){
-//                String line = fileSC.nextLine();
-//                if(line.equalsIgnoreCase("QUESTION " + currentQuestion)){
-//                    text.append(scanner.nextLine())
-//
-//                }
-//                question = new Question(fileSC.nextLine(), currentQuestion);
-//            }
-            System.out.println("Question " + currentQuestion + " :");
-            System.out.println(text);
-            System.out.println("Answers : \n" + answers);
+
+            question = new Question(questionText, currentQuestion);
+            answer = new Answer(alternatives, correctAnswer + 1);
+            System.out.println("Question № " + currentQuestion);
+            System.out.println(question.getQuestionText());
+            System.out.println("Answers : ");
+            printAnswers(answer);
+
+
             int choice;
             System.out.println("Enter your choice : ");
             choice = scanner.nextInt();
@@ -74,9 +76,16 @@ public class ContestantMenu {
                 choice = scanner.nextInt();
             }
 
+            System.out.println();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         return true;
+    }
+
+    public static void printAnswers(Answer answer){
+        for (int i = 0; i < 4; i++) {
+            System.out.println(answer.getText()[i]);
+        }
     }
 }
