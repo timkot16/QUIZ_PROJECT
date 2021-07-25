@@ -3,6 +3,7 @@ package com.company.menu;
 import com.company.Answer;
 import com.company.Contestant;
 import com.company.Question;
+import com.company.otherFiles.Tools;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,7 +18,7 @@ public class ContestantMenu {
     private final static File question = new File("questions.txt");
     private static final int questionsTotal = 20;
 
-    private static final List<Contestant> participants = new ArrayList<>();
+    private static final List<Contestant> participants = new ArrayList<>(); // to list players
 
     public static void contestantMenu() {
         int currentQuestion = 1;
@@ -25,17 +26,28 @@ public class ContestantMenu {
         String name = scanner.nextLine();
         System.out.println("Ok " + name + ", you can use 2 hints during the game. It's a:\n" +
                 "25/75 and 50/50.");
-        Contestant current_player = new Contestant(name, 0);
+        Contestant current_player = new Contestant(name);
         participants.add(current_player);
+
         while(current_player.getLifes() > 0 && currentQuestion <= questionsTotal){
-            loadQuestion(currentQuestion);
+            boolean isCorrect = loadQuestion(currentQuestion);
+
+            if(!isCorrect){
+                // TODO
+                //  lifes--
+                //  print that incorrect
+
+            } else{
+                // TODO
+                //  print that correct
+            }
             currentQuestion++;
-            //TODO load questions method
-
-            // if correct -> currentQuestion++
-            // if incorrect -> lifes-- && currentQuestion++
         }
-
+        System.out.println("Type 1 to go back to main menu\n" +
+                           "Type 2 to exit the game");
+        int choice = Tools.ReadNumber(1, 2);
+        //TODO switch to back in main menu or to exit the game
+        // ???or maybe to play again???
     }
 
     public static boolean loadQuestion(int currentQuestion){
@@ -54,7 +66,10 @@ public class ContestantMenu {
                     if(line.equalsIgnoreCase("answers " + currentQuestion)){
                         for (int i = 0; i < 4; i++) {
                             String alt = fileSC.nextLine();
-                            if(alt.contains("True")) correctAnswer = i;
+                            if(alt.contains("True")) {
+                                correctAnswer = i;
+                                alt = alt.replaceFirst("- True", "");
+                            }
                             alternatives[i] = alt;
                         }
                     }
@@ -62,19 +77,16 @@ public class ContestantMenu {
 
             question = new Question(questionText, currentQuestion);
             answer = new Answer(alternatives, correctAnswer + 1);
+
             System.out.println("Question № " + currentQuestion);
             System.out.println(question.getQuestionText());
             System.out.println("Answers : ");
             printAnswers(answer);
 
 
-            int choice;
-            System.out.println("Enter your choice : ");
-            choice = scanner.nextInt();
-            while(choice < 1 || choice > 4){
-                System.out.println("Enter the correct choice : ");
-                choice = scanner.nextInt();
-            }
+            System.out.print("Enter your choice : ");
+            //TODO give player a choice to use hint
+            int choice = Tools.ReadNumber(1, 4);
 
             System.out.println();
         } catch (FileNotFoundException e) {

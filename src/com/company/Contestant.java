@@ -1,17 +1,14 @@
 package com.company;
 
-import java.util.HashMap;
 
 public class Contestant {
     private final String name;
-    private int result;
-    private int lifes;
+    public int result = 0;
+    private int lifes = 3;
 
 
-    public Contestant(String name, int result) {
+    public Contestant(String name) {
         this.name = name;
-        this.result = result;
-        lifes = 3;
     }
 
     public void contestantResult() {
@@ -21,5 +18,13 @@ public class Contestant {
 
     public int getLifes() {
         return lifes;
+    }
+
+    public void setLifes(int lifes) {
+        this.lifes = lifes;
+    }
+
+    public String getName() {
+        return name;
     }
 }

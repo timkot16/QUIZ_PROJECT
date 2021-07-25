@@ -1,5 +1,7 @@
 package com.company.menu;
 
+import com.company.otherFiles.Tools;
+
 import java.util.Scanner;
 
 public class MainMenu {
@@ -9,13 +11,9 @@ public class MainMenu {
         System.out.println("Welcome to the Quiz game!");
         System.out.println("Type 1 - Start new game\n" +
                 "Type 2 - Results\n" +
-                "Type 3 - Exit the game\n");
+                "Type 3 - Exit the game");
 
-        int choice = scanner.nextInt();
-        while (choice < 1 || choice > 3) {
-            System.out.println("Enter the correct choice : ");
-            choice = scanner.nextInt();
-        }
+        int choice = Tools.ReadNumber(1, 3);
 
         switch (choice) {
             case 1:
