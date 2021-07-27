@@ -1,18 +1,11 @@
 package com.company;
 
-
 import com.company.menu.MainMenu;
 
-import java.io.IOException;
 
 public class Run {
 
-    public static void main(String[] args) throws IOException {
-        //TODO run method
+    public static void main(String[] args) {
         MainMenu.mainMenu();
-
-        System.out.println("Test pull");
-
-        System.out.println("test pull number 2 ");
     }
 }
