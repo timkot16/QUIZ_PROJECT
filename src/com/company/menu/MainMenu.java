@@ -2,10 +2,8 @@ package com.company.menu;
 
 import com.company.otherFiles.Tools;
 
-import java.util.Scanner;
 
 public class MainMenu {
-    private static final Scanner scanner = new Scanner(System.in);
 
 
     public static void mainMenu() {
