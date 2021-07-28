@@ -44,7 +44,7 @@ public class ResultsMenu {
     }
 
     public static void backToMainMenu() {
-        System.out.println("Type 1 - Back to menu\n" +
+        System.out.println("\nType 1 - Back to menu\n" +
                 "Type 2 - Exit the game\n");
 
         int choice = Tools.ReadNumber(1, 2);
@@ -64,16 +64,17 @@ public class ResultsMenu {
         List<PlayerResult> playerResults = ContestantMenu.getPlayersResults();
         System.out.println("Enter player's name: ");
         String player = scanner.nextLine();
+        boolean isFound = false;
         for (PlayerResult playerInfo : playerResults) {
             if (player.equals(playerInfo.getName())) {
                 System.out.println("Name: " + playerInfo.getName());
                 System.out.println("Result: " + playerInfo.getResult());
                 System.out.println(playerInfo.getQuestionAnswer());
+                isFound = true;
                 break;
-            } else {
-                System.out.println("User does not exist, try again.");
             }
         }
+        if(!isFound) System.out.println("Player is not found!\nTry again");
     }
 }
 
