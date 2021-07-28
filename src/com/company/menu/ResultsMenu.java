@@ -3,55 +3,78 @@ package com.company.menu;
 import com.company.PlayerResult;
 import com.company.otherFiles.Tools;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.function.Consumer;
 
 public class ResultsMenu {
 
+    public static Scanner scanner = new Scanner(System.in);
+
     public static void resultsMenu() {
-        System.out.println("1 - вывести в порядке убывания\n" +
-                "2 - найти пользователя");
+        System.out.println("Type 1 - Table with results\n" +
+                "Type 2 - Find a player by name\n");
 
         int choice = Tools.ReadNumber(1, 2);
 
         switch (choice) {
             case 1:
                 getOrderedPlayersResults();
+                backToMainMenu();
                 break;
             case 2:
-
+                findPlayer();
+                backToMainMenu();
                 break;
         }
-        // TODO Result menu
     }
 
     public static void getOrderedPlayersResults() {
-        Map<String, Integer> preResultList = new HashMap<>();
-//        Map<String, Integer> orderedResultList = new HashMap<>();
+        Map<String, Integer> orderedPlayersResults = new HashMap<>();
 
         List<PlayerResult> playerResults = ContestantMenu.getPlayersResults();
         for (PlayerResult playerResult : playerResults) {
-            preResultList.put(playerResult.getName(), playerResult.getResult());
+            orderedPlayersResults.put(playerResult.getName(), playerResult.getResult());
         }
 
-//        for (Map.Entry<String, Integer> entry : preResultList.entrySet()) {
-//
-//            String resultString = "Name: " + entry.getKey() + " | Result: " + entry.getValue();
-//            System.out.println(resultString);
-//        }
-
-        preResultList.entrySet().stream()
+        orderedPlayersResults.entrySet().stream()
                 .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
                 .forEach(stringIntegerEntry ->
                         System.out.println("Name " + stringIntegerEntry.getKey() +
                                 " result : " + stringIntegerEntry.getValue()));
     }
 
-//    public static void
+    public static void backToMainMenu() {
+        System.out.println("Type 1 - Back to menu\n" +
+                "Type 2 - Exit the game\n");
 
+        int choice = Tools.ReadNumber(1, 2);
 
+        switch (choice) {
+            case 1:
+                MainMenu.mainMenu();
+                break;
+            case 2:
+                System.out.println("Quiting the game!");
+                System.exit(0);
+                break;
+        }
+    }
 
+    public static void findPlayer() {
+        List<PlayerResult> playerResults = ContestantMenu.getPlayersResults();
+        System.out.println("Enter player's name: ");
+        String player = scanner.nextLine();
+        for (PlayerResult playerInfo : playerResults) {
+            if (player.equals(playerInfo.getName())) {
+                System.out.println("Name: " + playerInfo.getName());
+                System.out.println("Result: " + playerInfo.getResult());
+                System.out.println(playerInfo.getQuestionAnswer());
+                break;
+            } else {
+                System.out.println("User does not exist, try again.");
+            }
+        }
+    }
 }
+
+
