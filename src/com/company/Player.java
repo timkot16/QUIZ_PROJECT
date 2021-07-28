@@ -1,7 +1,7 @@
 package com.company;
 
 public class Player {
-    private String name;
+    private final String name;
     private int result;
     private int life = 3;
 
