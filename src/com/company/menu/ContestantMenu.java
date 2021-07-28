@@ -255,8 +255,10 @@ public class ContestantMenu {
                 hint25_75--;
             }
         }
-        System.out.print("Enter your choice : ");
-        choice = Tools.ReadNumber(1, 4);
+        if(choice > 4) {
+            System.out.print("Enter your choice : ");
+            choice = Tools.ReadNumber(1, 4);
+        }
         return choice;
     }
 
