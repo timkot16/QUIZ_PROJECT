@@ -67,7 +67,7 @@ public class ContestantMenu {
         System.out.println("Type 1 - Back to menu\n" +
                 "Type 2 - Exit the game\n");
 
-        int choice = Tools.ReadNumber(1, 3);
+        int choice = Tools.ReadNumber(1, 2);
 
         switch (choice) {
             case 1:
@@ -162,6 +162,7 @@ public class ContestantMenu {
         for (PlayerResult playerResult : playerResults) {
             System.out.println("Name: " + playerResult.getName());
             System.out.println("Result: " + playerResult.getResult());
+            System.out.println("QA: " + "\n" + playerResult.getQuestionAnswer() + "\n");
         }
     }
 
@@ -179,16 +180,21 @@ public class ContestantMenu {
     public static List<PlayerResult> getPlayersResults() {
         List<PlayerResult> playerResults = new ArrayList<>();
         File resultsDirectory = new File("Results");
-        List<File> files = List.of(resultsDirectory.listFiles());
+        List<File> files = List.of(Objects.requireNonNull(resultsDirectory.listFiles()));
 
         for (File file : files) {
             String name = null;
             String result = null;
+            String question = null;
+            String answer = null;
+
+            Map<String, String> questionAnswer = new HashMap<>();
+
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
 
                 String line = findNextLine(reader);
-                String nameTemplate = "Name: ";
 
+                String nameTemplate = "Name: ";
                 if (line.startsWith(nameTemplate)) {
                     name = line.substring(nameTemplate.length());
                 }
@@ -199,7 +205,31 @@ public class ContestantMenu {
                 if (line.startsWith(resultTemplate)) {
                     result = line.substring(resultTemplate.length());
                 }
-                playerResults.add(new PlayerResult(name, Integer.valueOf(result), null));
+
+                reader.readLine();
+
+                for (int i = 0; i < Integer.parseInt(result); i++) {
+                    line = reader.readLine();
+                    String questionTemplate = "Question: ";
+                    if (line.startsWith(questionTemplate)) {
+                        question = line.substring(questionTemplate.length());
+                    }
+
+                    line = reader.readLine();
+
+                    String answerTemplate = "Answer: ";
+                    if (line.startsWith(answerTemplate)) {
+                        answer = line.substring(answerTemplate.length());
+                    }
+
+                   reader.readLine();
+
+                    questionAnswer.put(question, answer);
+                }
+
+
+
+                playerResults.add(new PlayerResult(name, Integer.parseInt(result), questionAnswer));
             } catch (IOException e) {
                 e.printStackTrace();
             }

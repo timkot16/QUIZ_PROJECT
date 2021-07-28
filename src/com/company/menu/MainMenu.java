@@ -21,7 +21,7 @@ public class MainMenu {
                     ContestantMenu.contestantMenu();
                     break;
                 case 2:
-                    ContestantMenu.printPlayerResults();
+                    ResultsMenu.resultsMenu();
                     break;
                 case 3:
                     System.out.println("Quiting the game!");
