@@ -252,7 +252,7 @@ public class ContestantMenu {
             if(choice == 5 && hint50_50 == 1){
                 printIncorrect(questionV2.getAnswers(), 2);
                 hint50_50--;
-            } else if(hint25_75 == 1){
+            } else if(choice == 6 && hint25_75 == 1){
                 printIncorrect(questionV2.getAnswers(), 1);
                 hint25_75--;
             }
@@ -266,7 +266,8 @@ public class ContestantMenu {
         int counter = 0;
         for (Answer answer : answers) {
             if(!answer.isCorrect() && counter < n){
-                System.out.println(answer.getText() + " - Incorrect");
+//                System.out.println(answer.getText() + " - Incorrect");
+                System.out.println();
                 counter++;
             } else {
                 System.out.println(answer.getText());

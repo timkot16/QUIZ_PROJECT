@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.function.Consumer;
 
 public class ResultsMenu {
 
@@ -44,8 +45,9 @@ public class ResultsMenu {
 
         preResultList.entrySet().stream()
                 .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
-                .forEach(System.out::println);
-
+                .forEach(stringIntegerEntry ->
+                        System.out.println("Name " + stringIntegerEntry.getKey() +
+                                " result : " + stringIntegerEntry.getValue()));
     }
 
 //    public static void
