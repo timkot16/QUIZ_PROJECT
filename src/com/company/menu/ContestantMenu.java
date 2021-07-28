@@ -35,8 +35,8 @@ public class ContestantMenu {
             printAnswers(questionV2.getAnswers());
 
             System.out.print("Enter your choice ( ");
-            if(hint50_50 == 1) System.out.print("50/50 - 5 ");
-            if(hint25_75 == 1) System.out.print(" 25/75 - 6");
+            if (hint50_50 == 1) System.out.print("50/50 - 5 ");
+            if (hint25_75 == 1) System.out.print(" 25/75 - 6");
             System.out.print(") : ");
 
 
@@ -230,12 +230,10 @@ public class ContestantMenu {
                         answer = line.substring(answerTemplate.length());
                     }
 
-                   reader.readLine();
+                    reader.readLine();
 
                     questionAnswer.put(question, answer);
                 }
-
-
 
                 playerResults.add(new PlayerResult(name, Integer.parseInt(result), questionAnswer));
             } catch (IOException e) {
@@ -246,13 +244,13 @@ public class ContestantMenu {
         return playerResults;
     }
 
-    public static int hintCheck(Question questionV2 ,int choice){
-        if(choice > 4 && (hint25_75 == 1 || hint50_50 == 1)){
+    public static int hintCheck(Question questionV2, int choice) {
+        if (choice > 4 && (hint25_75 == 1 || hint50_50 == 1)) {
             printQuestion(questionV2);
-            if(choice == 5 && hint50_50 == 1){
+            if (choice == 5 && hint50_50 == 1) {
                 printIncorrect(questionV2.getAnswers(), 2);
                 hint50_50--;
-            } else if(choice == 6 && hint25_75 == 1){
+            } else if (choice == 6 && hint25_75 == 1) {
                 printIncorrect(questionV2.getAnswers(), 1);
                 hint25_75--;
             }
@@ -262,10 +260,10 @@ public class ContestantMenu {
         return choice;
     }
 
-    public static void printIncorrect(List<Answer> answers, int n){
+    public static void printIncorrect(List<Answer> answers, int n) {
         int counter = 0;
         for (Answer answer : answers) {
-            if(!answer.isCorrect() && counter < n){
+            if (!answer.isCorrect() && counter < n) {
 //                System.out.println(answer.getText() + " - Incorrect");
                 System.out.println();
                 counter++;
